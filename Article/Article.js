@@ -1,5 +1,6 @@
 /* This is the data we will be using to create our article components */
 /* Look over this data, then proceed to line 91*/
+window.addEventListener('load', ()=> {
 const data = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
@@ -87,6 +88,7 @@ const data = [
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
+// window.addEventListener('load', (e)=> {
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
@@ -110,5 +112,81 @@ const data = [
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
-
 */
+
+
+// const article = document.querySelector(".articles");
+
+
+// data.forEach(data => {
+//   console.log("creating article");
+//   article.appendChild(createNewsFeed(data.title,data.date,data.firstParagraph,data.secondParagraph,data.thirdParagraph));
+// });
+//Function 
+
+
+function createNewsFeed(data){
+    const article = document.createElement('div');
+    const articleTitle = document.createElement('h2');
+    const articleDate = document.createElement('p');
+    const firstParagraph = document.createElement('p');
+    const secondParagraph = document.createElement('p');
+    const thirdParagraph = document.createElement('p');
+    const buttonExpanded = document.createElement('span');
+    const buttonCollapsed = document.createElement('span');
+  
+  
+
+//Structure Elements
+
+        article.appendChild(articleTitle);
+        article.appendChild(articleDate);
+        article.appendChild(firstParagraph);
+        article.appendChild(secondParagraph);
+        article.appendChild(thirdParagraph);
+        article.appendChild(buttonExpanded);
+        article.appendChild(buttonCollapsed);
+
+        const open = '\u25b2';
+        const close = '\u25b2';
+     
+//Class Names
+        article.classList.add('article');
+        articleDate.classList.add('date');
+        buttonExpanded.classList.add('expandButton');
+        buttonCollapsed.classList.add('close');
+
+//Set Content
+        // span.textContent = "expand";
+        articleTitle.textContent = data.title;
+        articleDate.textContent = data.date;
+        firstParagraph.textContent = data.firstParagraph;
+        secondParagraph.textContent = data.secondParagraph;
+        thirdParagraph.textContent = data.thirdParagraph;
+        buttonExpanded.textContent = open;
+        buttonCollapsed.textContent = close;
+
+
+
+       buttonExpanded.addEventListener('click', () => {
+           console.log('article open');
+            article.classList.toggle('article-open');
+          })
+
+          buttonCollapsed.addEventListener('click', () => {
+            console.log('article Close');
+             article.classList.toggle('article-close');
+           })
+
+        return article;
+    }
+
+    
+    const articles = document.querySelector(".articles");
+
+
+    data.forEach(data => {
+      console.log("creating article");
+      articles.appendChild(createNewsFeed(data));
+    });
+})
